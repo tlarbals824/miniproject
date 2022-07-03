@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>miniproject</title>
+</head>
+<body>
+<h1>Item Information</h1>
+<form action="itemedit.html" th:action method="post">
+    <fieldset>
+        <legend>Item Information</legend>
+        <label for="itemId">Id</label>
+        <input type="text" id="itemId" value="test1" th:value="${item.id}" readonly><br>
+
+        <label for="itemName">Name</label>
+        <input type="text" id="itemName" name="name" value="test1" th:value="${item.name}" readonly><br>
+
+        <label for="price">Price</label>
+        <input type="text" id="price"  name="price" value="test1" th:value="${item.price}" readonly><br>
+
+        <label for="quantity">Quantity</label>
+        <input type="text" id="quantity" name="quantity" value="test1" th:value="${item.quantity}" readonly><br>
+
+        <button type="submit" >edit</button>
+        <button type="button" onclick="location.href='item/items.html'"
+                th:onclick="|location.href='@{/items}'|"
+        >cancel</button>
+    </fieldset>
+</form>
+</body>
+</html>
