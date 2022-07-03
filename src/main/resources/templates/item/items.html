@@ -6,23 +6,26 @@
 </head>
 <body>
     <h1>Item List</h1>
+    <button type="button" th:onclick="|location.href='@{/items/item-add}'|">addItem</button>
     <table>
-        <caption>모든 아이템 이름, 가격, 수량 조회</caption>
+        <caption>모든 아이템 이름, 가격, 수량</caption>
         <tr>
             <th>Id</th>
             <th>이름</th>
             <th>가격</th>
             <th>수량</th>
-            <th>수정</th>
+            <th></th>
         </tr>
-        <tr th:each="items : ${items}">
-            <td th:text="${items.id}">Id</td>
-            <td th:text="${items.name}">이름</td>
-            <td th:text="${items.price}">가격</td>
-            <td th:text="${items.quantity}">수량</td>
+        <tr th:each="item : ${items}">
+            <td th:text="${item.id}" style="cursor: pointer" onclick="location.href='item/itemedit.html'"
+                th:onclick="|location.href='@{/items/{itemId}(itemId=${item.id})}'|">Id</td>
+            <td th:text="${item.name}" style="cursor: pointer"
+                th:onclick="|location.href='@{/items/{itemId}(itemId=${item.id})}'|">이름</td>
+            <td th:text="${item.price}">가격</td>
+            <td th:text="${item.quantity}">수량</td>
             <td>
                 <button type="button" onclick="location.href='itemedit.html'"
-                th:onclick="|location.href='@{/items/{itemId}/edit(itemId=${items.id})}'|">
+                th:onclick="|location.href='@{/items/{itemId}/edit(itemId=${item.id})}'|">
                     수정</button>
             </td>
         </tr>

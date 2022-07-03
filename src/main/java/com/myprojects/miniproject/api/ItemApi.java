@@ -34,7 +34,7 @@ public class ItemApi {
     /**
      * @author 심규민
      * CRUD: Read(Get)
-     * 단일 아이템 조회
+     * 단일 아이템 수정 조회
      */
     @GetMapping(value = "/{itemId}/edit")
     public String editForm(@PathVariable("itemId")Long itemId,Model model){
@@ -50,9 +50,25 @@ public class ItemApi {
      */
     @PostMapping(value = "/{itemId}/edit")
     public String edit(@ModelAttribute("item") ItemDto itemDto, @PathVariable("itemId") Long itemId){
-        System.out.println("itemDto = " + itemDto);
         itemService.updateItem(itemId,itemDto);
-        return "redirect:/items";
+        return "redirect:/items/{itemId}";
+    }
+
+    @GetMapping(value = "/{itemId}")
+    public String inform(@PathVariable("itemId")Long id,Model model){
+        model.addAttribute("item",itemService.findOneItemById(id));
+        return "item/iteminformation";
+    }
+
+    @PostMapping(value = "/{itemId}")
+    public String informToEdit(@PathVariable("itemId")Long id,
+                               @ModelAttribute("item") ItemDto item){
+        return "redirect:/items/{itemId}/edit";
+    }
+
+    @GetMapping(value = "/item-add")
+    public String itemAdd(){
+        return "item/itemadd";
     }
 
     @PostConstruct
